@@ -1,6 +1,27 @@
 <template>
-    <div class="border col-sm-4 float-right">
-        test
+    <div class=" contacts-list border col-sm-4 float-right">
+        <ul>
+            <li>
+                <div class="avatar">
+                    <img src="img/150x150.png" alt="Avatar"/>
+                </div>
+                <div class="contact">
+                    <p class="name">faissa</p>
+                    <p class="email">faissa@gmail.com</p>
+                </div>
+                <span class="unread">1</span>
+            </li>
+            <li>
+                <div class="avatar">
+                    <img src="img/150x150.png" alt="Avatar"/>
+                </div>
+                <div class="contact">
+                    <p class="name">angga</p>
+                    <p class="email">angga@gmail.com</p>
+                </div>
+                <span class="unread">1</span>
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -10,6 +31,66 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.contacts-list {
+    flex: 2;
+    max-height: 100%;
+    height: 500px;
+    overflow: auto;
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+        li {
+            display: flex;
+            padding: 2px;
+            border-bottom: 1px solid #aaaaaa;
+            height: 80px;
+            position: relative;
+            cursor: pointer;
+            &.selected {
+                background: #dfdfdf;
+            }
+            span.unread {
+                background: #1371ec;
+                color: #fff;
+                position: absolute;
+                right: 11px;
+                top: 20px;
+                display: flex;
+                font-weight: 700;
+                min-width: 20px;
+                justify-content: center;
+                align-items: center;
+                line-height: 20px;
+                font-size: 10px;
+                padding: 0 4px;
+                border-radius: 50%;
+            }
+            .avatar {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                img {
+                    width: 55px;
+                    border-radius: 50%;
+                    margin: 0 auto;
+                }
+            }
+            .contact {
+                flex: 3;
+                font-size: 15px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                p {
+                    margin: 0;
+                    &.name {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+}
 </style>
