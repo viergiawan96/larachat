@@ -2005,17 +2005,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    loadUser: function loadUser() {
+      return this.$store.getters.user;
+    }
+  }
+});
 
 /***/ }),
 
@@ -2030,6 +2026,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MessagesFeed_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MessagesFeed.vue */ "./resources/js/components/MessagesFeed.vue");
 /* harmony import */ var _MessageComposer_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MessageComposer.vue */ "./resources/js/components/MessageComposer.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -2040,9 +2038,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    loadUser: function loadUser() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/getuser').then(function (response) {
+        _this.$store.commit('UpdUsr', response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.$store.commit('updUsrId', this.$userId);
+    this.loadUser();
+  },
   components: {
     MessagesFeed: _MessagesFeed_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     MessageComposer: _MessageComposer_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -38273,48 +38287,38 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: " contacts-list border col-sm-4 float-right" },
+    [
+      _c(
+        "ul",
+        _vm._l(_vm.loadUser, function(user) {
+          return _c("li", { key: user.id }, [
+            _vm._m(0, true),
+            _vm._v(" "),
+            _c("div", { staticClass: "contact" }, [
+              _c("p", { staticClass: "name" }, [_vm._v(_vm._s(user.name))]),
+              _vm._v(" "),
+              _c("p", { staticClass: "email" }, [_vm._v(_vm._s(user.email))])
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "unread" }, [_vm._v("1")])
+          ])
+        }),
+        0
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: " contacts-list border col-sm-4 float-right" },
-      [
-        _c("ul", [
-          _c("li", [
-            _c("div", { staticClass: "avatar" }, [
-              _c("img", { attrs: { src: "img/150x150.png", alt: "Avatar" } })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "contact" }, [
-              _c("p", { staticClass: "name" }, [_vm._v("faissa")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "email" }, [_vm._v("faissa@gmail.com")])
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "unread" }, [_vm._v("1")])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("div", { staticClass: "avatar" }, [
-              _c("img", { attrs: { src: "img/150x150.png", alt: "Avatar" } })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "contact" }, [
-              _c("p", { staticClass: "name" }, [_vm._v("angga")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "email" }, [_vm._v("angga@gmail.com")])
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "unread" }, [_vm._v("1")])
-          ])
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "avatar" }, [
+      _c("img", { attrs: { src: "img/150x150.png", alt: "Avatar" } })
+    ])
   }
 ]
 render._withStripped = true
@@ -51614,6 +51618,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store(_store__WEBPACK_IMPORTED_MODULE_2__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('app-chat', __webpack_require__(/*! ./components/appChat.vue */ "./resources/js/components/appChat.vue")["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   store: store,
@@ -52075,10 +52080,29 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  state: {},
-  getters: {},
-  mutations: {},
+  state: {
+    user: [],
+    idUser: 0
+  },
+  getters: {
+    user: function user(state) {
+      return state.user.filter(function (user) {
+        return user.id != state.idUser;
+      });
+    }
+  },
+  mutations: {
+    UpdUsr: function UpdUsr(state, usr) {
+      state.user = usr;
+    },
+    updUsrId: function updUsrId(state, id) {
+      state.idUser = id;
+    }
+  },
   actions: {}
 });
 

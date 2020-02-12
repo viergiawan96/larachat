@@ -1,23 +1,13 @@
 <template>
     <div class=" contacts-list border col-sm-4 float-right">
         <ul>
-            <li>
+            <li v-for="user in loadUser" :key="user.id" >
                 <div class="avatar">
                     <img src="img/150x150.png" alt="Avatar"/>
                 </div>
                 <div class="contact">
-                    <p class="name">faissa</p>
-                    <p class="email">faissa@gmail.com</p>
-                </div>
-                <span class="unread">1</span>
-            </li>
-            <li>
-                <div class="avatar">
-                    <img src="img/150x150.png" alt="Avatar"/>
-                </div>
-                <div class="contact">
-                    <p class="name">angga</p>
-                    <p class="email">angga@gmail.com</p>
+                    <p class="name">{{ user.name }}</p>
+                    <p class="email">{{ user.email }}</p>
                 </div>
                 <span class="unread">1</span>
             </li>
@@ -27,7 +17,11 @@
 
 <script>
 export default {
-    
+    computed:{
+        loadUser(){
+            return this.$store.getters.user;
+        }
+    }
 }
 </script>
 

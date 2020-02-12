@@ -6,6 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @yield('meta')
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 

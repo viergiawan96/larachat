@@ -11,8 +11,24 @@
 <script>
 import MessagesFeed from './MessagesFeed.vue';
 import MessageComposer from './MessageComposer.vue';
+import Axios from "axios";
 
 export default {
+    methods:{
+        loadUser(){
+            Axios.get('/api/getuser')
+                .then((response) => {
+                    this.$store.commit('UpdUsr',response.data);
+                })
+                .catch((error) =>{
+                    console.log(error);
+                })
+        }
+    },
+     mounted(){
+        this.$store.commit('updUsrId',this.$userId);
+        this.loadUser();
+    },
     components: {
         MessagesFeed,
         MessageComposer
