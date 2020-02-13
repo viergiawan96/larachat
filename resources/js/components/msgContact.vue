@@ -1,7 +1,7 @@
 <template>
     <div class="col-lg-8 border">
         <div class="pt-2 border-bottom">
-            <h5>Faissa</h5>    
+            <h5>{{ usrfrom ? usrfrom : 'Select a Contact'}}</h5>    
         </div>
             <MessagesFeed/>
             <MessageComposer/>
@@ -28,6 +28,11 @@ export default {
      mounted(){
         this.$store.commit('updUsrId',this.$userId);
         this.loadUser();
+    },
+    computed:{
+        usrfrom(){
+            return this.$store.getters.usrFrom;
+        }
     },
     components: {
         MessagesFeed,

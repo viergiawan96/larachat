@@ -1,7 +1,7 @@
 <template>
     <div class=" contacts-list border col-sm-4 float-right">
         <ul>
-            <li v-for="user in loadUser" :key="user.id" >
+            <li v-for="user in loadUser" :key="user.id" @click="filmsg(user.id)" >
                 <div class="avatar">
                     <img src="img/150x150.png" alt="Avatar"/>
                 </div>
@@ -16,7 +16,33 @@
 </template>
 
 <script>
+import Axios from 'axios';
+
 export default {
+    data() {
+        return{
+            idfil: {
+               idForm: 0,
+               idTO:0
+            }
+        }
+    },
+    methods: {
+        filmsg(id){
+            this.idfil.idForm = id;
+            this.idfil.idTo =  this.$store.getters.idUser;
+
+            Axios.post('/api/filmsg', this.idfil)
+            .then((response) => {
+                
+                this.$store.commit('getUser', response.data.nameUser);
+                this.$store.commit('getFromTo', response.data);
+
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
+    },
     computed:{
         loadUser(){
             return this.$store.getters.user;

@@ -1940,11 +1940,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    msgFromTo: function msgFromTo() {
+      return this.$store.getters.filmsg.from;
+    }
+  }
+});
 
 /***/ }),
 
@@ -1988,6 +1990,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2005,7 +2009,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      idfil: {
+        idForm: 0,
+        idTO: 0
+      }
+    };
+  },
+  methods: {
+    filmsg: function filmsg(id) {
+      var _this = this;
+
+      this.idfil.idForm = id;
+      this.idfil.idTo = this.$store.getters.idUser;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/filmsg', this.idfil).then(function (response) {
+        _this.$store.commit('getUser', response.data.nameUser);
+
+        _this.$store.commit('getFromTo', response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
   computed: {
     loadUser: function loadUser() {
       return this.$store.getters.user;
@@ -2056,6 +2084,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.$store.commit('updUsrId', this.$userId);
     this.loadUser();
+  },
+  computed: {
+    usrfrom: function usrfrom() {
+      return this.$store.getters.usrFrom;
+    }
   },
   components: {
     MessagesFeed: _MessagesFeed_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -38209,32 +38242,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { ref: "feed", staticClass: "feed mb-3" }, [_vm._m(0)])
+  return _c("div", { ref: "feed", staticClass: "feed mb-3" }, [
+    _c(
+      "ul",
+      [
+        _vm._v("\n        " + _vm._s(_vm.msgFromTo) + "\n        "),
+        _vm._l(_vm.msgFromTo, function(msg) {
+          return _c("li", { key: msg.id }, [
+            _c("div", { staticClass: "text" }, [
+              _vm._v("\n                " + _vm._s(msg.text) + "\n            ")
+            ])
+          ])
+        })
+      ],
+      2
+    )
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", [
-      _c("li", { staticClass: "message sent" }, [
-        _c("div", { staticClass: "text" }, [
-          _vm._v(
-            "\n                Lorem ipsum, dolor sit amet consectetur adipisicing elit. \n            "
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "message received" }, [
-        _c("div", { staticClass: "text" }, [
-          _vm._v(
-            "\n                Lorem ipsum, dolor sit amet consectetur adipisicing elit.\n            "
-          )
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38294,17 +38319,28 @@ var render = function() {
       _c(
         "ul",
         _vm._l(_vm.loadUser, function(user) {
-          return _c("li", { key: user.id }, [
-            _vm._m(0, true),
-            _vm._v(" "),
-            _c("div", { staticClass: "contact" }, [
-              _c("p", { staticClass: "name" }, [_vm._v(_vm._s(user.name))]),
+          return _c(
+            "li",
+            {
+              key: user.id,
+              on: {
+                click: function($event) {
+                  return _vm.filmsg(user.id)
+                }
+              }
+            },
+            [
+              _vm._m(0, true),
               _vm._v(" "),
-              _c("p", { staticClass: "email" }, [_vm._v(_vm._s(user.email))])
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "unread" }, [_vm._v("1")])
-          ])
+              _c("div", { staticClass: "contact" }, [
+                _c("p", { staticClass: "name" }, [_vm._v(_vm._s(user.name))]),
+                _vm._v(" "),
+                _c("p", { staticClass: "email" }, [_vm._v(_vm._s(user.email))])
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "unread" }, [_vm._v("1")])
+            ]
+          )
         }),
         0
       )
@@ -38346,7 +38382,11 @@ var render = function() {
     "div",
     { staticClass: "col-lg-8 border" },
     [
-      _vm._m(0),
+      _c("div", { staticClass: "pt-2 border-bottom" }, [
+        _c("h5", [
+          _vm._v(_vm._s(_vm.usrfrom ? _vm.usrfrom : "Select a Contact"))
+        ])
+      ]),
       _vm._v(" "),
       _c("MessagesFeed"),
       _vm._v(" "),
@@ -38355,16 +38395,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pt-2 border-bottom" }, [
-      _c("h5", [_vm._v("Faissa")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -52080,19 +52111,30 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: {
     user: [],
-    idUser: 0
+    idUser: 0,
+    filmsg: {
+      from: [],
+      to: []
+    },
+    usrFrom: ''
   },
   getters: {
     user: function user(state) {
       return state.user.filter(function (user) {
         return user.id != state.idUser;
       });
+    },
+    idUser: function idUser(state) {
+      return state.idUser;
+    },
+    filmsg: function filmsg(state) {
+      return state.filmsg;
+    },
+    usrFrom: function usrFrom(state) {
+      return state.usrFrom;
     }
   },
   mutations: {
@@ -52101,6 +52143,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     updUsrId: function updUsrId(state, id) {
       state.idUser = id;
+    },
+    getUser: function getUser(state, user) {
+      state.usrFrom = user;
+    },
+    getFromTo: function getFromTo(state, fromTo) {
+      state.filmsg.from = fromTo.msgFrom;
+      state.filmsg.to = fromTo.msgTo;
     }
   },
   actions: {}

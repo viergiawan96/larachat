@@ -1,14 +1,10 @@
 <template>
     <div class="feed mb-3" ref="feed">
         <ul>
-            <li class="message sent">
+            {{msgFromTo}}
+            <li v-for="msg in msgFromTo" :key="msg.id">
                 <div class="text">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-                </div>
-            </li>
-            <li class="message received">
-                <div class="text">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    {{msg.text}}
                 </div>
             </li>
         </ul>
@@ -17,7 +13,11 @@
 
 <script>
 export default {
-    
+    computed:{
+        msgFromTo() {
+            return this.$store.getters.filmsg.from;
+        }
+    }
 }
 </script>
 
