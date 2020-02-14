@@ -2,10 +2,8 @@ export default{
     state: {
         user:[],
         idUser: 0,
-        filmsg:{
-            from:[],
-            to:[]
-        },
+        idusrFrom:0,
+        filmsg:[],
         usrFrom:''
     },
     getters: {
@@ -22,6 +20,9 @@ export default{
         },
         usrFrom(state) {
             return state.usrFrom;
+        },
+        idusrFrom(state) {
+            return state.idusrFrom;
         }
     },
     mutations: {
@@ -34,12 +35,31 @@ export default{
         getUser(state, user) {
             state.usrFrom = user;
         },
-        getFromTo(state, fromTo) {
-            state.filmsg.from = fromTo.msgFrom;
-            state.filmsg.to = fromTo.msgTo;
+        getFilMsg(state, Filmsg) {
+            state.filmsg = Filmsg;
+        },
+        getidUsrFrom(state, idusrFrom) {
+            state.idusrFrom = idusrFrom;
+        },
+        pushMsg(state, msgNew){
+            state.filmsg.push(msgNew);
         }
     },
     actions: {
-
+        pushMsg({commit}, msgNew) {
+            commit('pushMsg',msgNew);
+        },
+        updUsrId({commit}, id) {
+            commit('updUsrId', id)
+        },
+        getidUsrFrom({commit}, idusrFrom) {
+            commit('getidUsrFrom', idusrFrom)
+        },
+        getUser({commit}, user) {
+            commit('getUser', user)
+        },
+        getFilMsg({commit}, Filmsg) {
+            commit('getFilMsg', Filmsg)
+        }
     }
 };

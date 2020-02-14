@@ -31,13 +31,12 @@ export default {
         filmsg(id){
             this.idfil.idForm = id;
             this.idfil.idTo =  this.$store.getters.idUser;
+            this.$store.dispatch('getidUsrFrom', id);
 
             Axios.post('/api/filmsg', this.idfil)
-            .then((response) => {
-                
-                this.$store.commit('getUser', response.data.nameUser);
-                this.$store.commit('getFromTo', response.data);
-
+            .then((response) => { 
+                this.$store.dispatch('getUser', response.data.nameUser);
+                this.$store.dispatch('getFilMsg', response.data.msgFill);
             }).catch((error) => {
                 console.log(error);
             })

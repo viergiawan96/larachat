@@ -19,10 +19,28 @@ class chatController extends Controller
         $idForm = $request->idForm;
         $idTo = $request->idTo;
 
-        $msgFrom = message::where('from',$idForm)->where('to',$idTo)->select('id','text')->get();
-        $msgTo = message::where('to',$idForm)->where('from',$idTo)->select('id','text')->get();
         $nameUser = user::find($idForm)->name;
 
-        return response()->json(compact('msgFrom','msgTo','nameUser'));
+        $msgFill = Message::where(function($q) use ($idForm, $idTo ) {
+            $q->where('from',$idForm);
+            $q->where('to',$idTo);
+        })->orWhere(function($q) use ($idForm, $idTo) {
+            $q->where('to',$idForm);
+            $q->where('from',$idTo);
+        })
+        ->get();
+
+        return response()->json(compact('msgFill','nameUser'));
+    }
+
+    public function sendMsg(Request $request)
+    {
+        $message = new message;
+        $message->from = $request->idFrom;
+        $message->to = $request->idTo;
+        $message->text = $request->text;
+        $message->save();
+        
+        return response()->json($message);
     }
 }

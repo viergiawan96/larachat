@@ -1,8 +1,7 @@
 <template>
     <div class="feed mb-3" ref="feed">
         <ul>
-            {{msgFromTo}}
-            <li v-for="msg in msgFromTo" :key="msg.id">
+            <li v-for="msg in msgFill" :key="msg.id"  :class="`message${msg.to == getIdusr ? ' sent' : ' received'}`">
                 <div class="text">
                     {{msg.text}}
                 </div>
@@ -14,8 +13,11 @@
 <script>
 export default {
     computed:{
-        msgFromTo() {
-            return this.$store.getters.filmsg.from;
+        msgFill() {
+            return this.$store.getters.filmsg;
+        },
+        getIdusr(){
+            return this.$store.getters.idUser;
         }
     }
 }

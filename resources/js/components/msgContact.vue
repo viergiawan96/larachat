@@ -4,7 +4,7 @@
             <h5>{{ usrfrom ? usrfrom : 'Select a Contact'}}</h5>    
         </div>
             <MessagesFeed/>
-            <MessageComposer/>
+            <MessageComposer @send="sendMessage"/>
     </div>
 </template>
 
@@ -23,10 +23,30 @@ export default {
                 .catch((error) =>{
                     console.log(error);
                 })
+        },
+        sendMessage(text) {
+            const usrFrom= this.$store.getters.usrFrom;
+            const idUsrFrom = this.$store.getters.idusrFrom;
+            if(!usrFrom){
+                return;
+            }
+
+            Axios.post('/api/sendMsg',{
+                idTo : idUsrFrom,
+                idFrom : this.$userId,
+                text: text
+            })
+            .then((response) => {
+                this.$store.dispatch('pushMsg', response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
         }
     },
      mounted(){
-        this.$store.commit('updUsrId',this.$userId);
+        this.$store.dispatch('updUsrId',this.$userId);
         this.loadUser();
     },
     computed:{

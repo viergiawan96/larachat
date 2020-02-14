@@ -1,12 +1,27 @@
 <template>
     <div class="composer">
-        <textarea></textarea>
+        <textarea v-model="message" v-on:keyup.enter.ctrl="send" placeholder="message.."></textarea>
     </div>
 </template>
 
 <script>
 export default {
-    
+    data() {
+        return{
+            message: ''
+        }
+    },
+    methods: {
+        send(e){
+            e.preventDefault();
+
+            if (this.message == ''){
+                return;
+            }
+            this.$emit('send', this.message);
+            this.message='';
+        }
+    }
 }
 </script>
 

@@ -1914,7 +1914,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      message: ''
+    };
+  },
+  methods: {
+    send: function send(e) {
+      e.preventDefault();
+
+      if (this.message == '') {
+        return;
+      }
+
+      this.$emit('send', this.message);
+      this.message = '';
+    }
+  }
+});
 
 /***/ }),
 
@@ -1939,11 +1957,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
-    msgFromTo: function msgFromTo() {
-      return this.$store.getters.filmsg.from;
+    msgFill: function msgFill() {
+      return this.$store.getters.filmsg;
+    },
+    getIdusr: function getIdusr() {
+      return this.$store.getters.idUser;
     }
   }
 });
@@ -2025,10 +2045,11 @@ __webpack_require__.r(__webpack_exports__);
 
       this.idfil.idForm = id;
       this.idfil.idTo = this.$store.getters.idUser;
+      this.$store.dispatch('getidUsrFrom', id);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/filmsg', this.idfil).then(function (response) {
-        _this.$store.commit('getUser', response.data.nameUser);
+        _this.$store.dispatch('getUser', response.data.nameUser);
 
-        _this.$store.commit('getFromTo', response.data);
+        _this.$store.dispatch('getFilMsg', response.data.msgFill);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2079,10 +2100,30 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    sendMessage: function sendMessage(text) {
+      var _this2 = this;
+
+      var usrFrom = this.$store.getters.usrFrom;
+      var idUsrFrom = this.$store.getters.idusrFrom;
+
+      if (!usrFrom) {
+        return;
+      }
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sendMsg', {
+        idTo: idUsrFrom,
+        idFrom: this.$userId,
+        text: text
+      }).then(function (response) {
+        _this2.$store.dispatch('pushMsg', response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   mounted: function mounted() {
-    this.$store.commit('updUsrId', this.$userId);
+    this.$store.dispatch('updUsrId', this.$userId);
     this.loadUser();
   },
   computed: {
@@ -38211,16 +38252,42 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "composer" }, [
+    _c("textarea", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.message,
+          expression: "message"
+        }
+      ],
+      attrs: { placeholder: "message.." },
+      domProps: { value: _vm.message },
+      on: {
+        keyup: function($event) {
+          if (
+            !$event.type.indexOf("key") &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          if (!$event.ctrlKey) {
+            return null
+          }
+          return _vm.send($event)
+        },
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.message = $event.target.value
+        }
+      }
+    })
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "composer" }, [_c("textarea")])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38245,17 +38312,21 @@ var render = function() {
   return _c("div", { ref: "feed", staticClass: "feed mb-3" }, [
     _c(
       "ul",
-      [
-        _vm._v("\n        " + _vm._s(_vm.msgFromTo) + "\n        "),
-        _vm._l(_vm.msgFromTo, function(msg) {
-          return _c("li", { key: msg.id }, [
+      _vm._l(_vm.msgFill, function(msg) {
+        return _c(
+          "li",
+          {
+            key: msg.id,
+            class: "message" + (msg.to == _vm.getIdusr ? " sent" : " received")
+          },
+          [
             _c("div", { staticClass: "text" }, [
               _vm._v("\n                " + _vm._s(msg.text) + "\n            ")
             ])
-          ])
-        })
-      ],
-      2
+          ]
+        )
+      }),
+      0
     )
   ])
 }
@@ -38390,7 +38461,7 @@ var render = function() {
       _vm._v(" "),
       _c("MessagesFeed"),
       _vm._v(" "),
-      _c("MessageComposer")
+      _c("MessageComposer", { on: { send: _vm.sendMessage } })
     ],
     1
   )
@@ -52115,10 +52186,8 @@ __webpack_require__.r(__webpack_exports__);
   state: {
     user: [],
     idUser: 0,
-    filmsg: {
-      from: [],
-      to: []
-    },
+    idusrFrom: 0,
+    filmsg: [],
     usrFrom: ''
   },
   getters: {
@@ -52135,6 +52204,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     usrFrom: function usrFrom(state) {
       return state.usrFrom;
+    },
+    idusrFrom: function idusrFrom(state) {
+      return state.idusrFrom;
     }
   },
   mutations: {
@@ -52147,12 +52219,38 @@ __webpack_require__.r(__webpack_exports__);
     getUser: function getUser(state, user) {
       state.usrFrom = user;
     },
-    getFromTo: function getFromTo(state, fromTo) {
-      state.filmsg.from = fromTo.msgFrom;
-      state.filmsg.to = fromTo.msgTo;
+    getFilMsg: function getFilMsg(state, Filmsg) {
+      state.filmsg = Filmsg;
+    },
+    getidUsrFrom: function getidUsrFrom(state, idusrFrom) {
+      state.idusrFrom = idusrFrom;
+    },
+    pushMsg: function pushMsg(state, msgNew) {
+      state.filmsg.push(msgNew);
     }
   },
-  actions: {}
+  actions: {
+    pushMsg: function pushMsg(_ref, msgNew) {
+      var commit = _ref.commit;
+      commit('pushMsg', msgNew);
+    },
+    updUsrId: function updUsrId(_ref2, id) {
+      var commit = _ref2.commit;
+      commit('updUsrId', id);
+    },
+    getidUsrFrom: function getidUsrFrom(_ref3, idusrFrom) {
+      var commit = _ref3.commit;
+      commit('getidUsrFrom', idusrFrom);
+    },
+    getUser: function getUser(_ref4, user) {
+      var commit = _ref4.commit;
+      commit('getUser', user);
+    },
+    getFilMsg: function getFilMsg(_ref5, Filmsg) {
+      var commit = _ref5.commit;
+      commit('getFilMsg', Filmsg);
+    }
+  }
 });
 
 /***/ }),
