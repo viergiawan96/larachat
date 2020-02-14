@@ -32,6 +32,12 @@ class SendGlobalNotification
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('message.'. $this->message->to);
+    }
+    public function broadcastWith()
+    {
+        $this->message->load('fromContact');
+
+        return ["message" => $this->message];
     }
 }
