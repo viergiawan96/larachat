@@ -1958,6 +1958,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    scrollBottom: function scrollBottom() {
+      var _this = this;
+
+      setTimeout(function () {
+        _this.$refs.feed.scrollTop = _this.$refs.feed.scrollHeight - _this.$refs.feed.clientHeight;
+      }, 50);
+    }
+  },
+  watch: {
+    getIdusr: function getIdusr(_getIdusr) {
+      this.scrollBottom();
+    },
+    msgFill: function msgFill(_msgFill) {
+      this.scrollBottom();
+    }
+  },
   computed: {
     msgFill: function msgFill() {
       return this.$store.getters.filmsg;
@@ -1998,11 +2015,9 @@ __webpack_require__.r(__webpack_exports__);
       var idusrFrom = this.$store.getters.idusrFrom;
 
       if (message.from == idusrFrom) {
-        this.$store.dispatch('pushMsg');
+        this.$store.dispatch('pushMsg', message);
         return;
       }
-
-      alert("Hello! I am an alert box!!");
     }
   },
   mounted: function mounted() {
@@ -2010,8 +2025,6 @@ __webpack_require__.r(__webpack_exports__);
 
     Echo["private"]("messages.".concat(this.$store.getters.idUser)).listen('SendGlobalNotification', function (e) {
       _this.hanleIncoming(e.message);
-
-      alert("Hello! I am an alert box!!");
     });
   },
   components: {
@@ -8688,7 +8701,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".feed[data-v-4b6ab3f5] {\n  height: 100%;\n  max-height: 350px;\n  overflow: auto;\n}\n.feed ul[data-v-4b6ab3f5] {\n  list-style-type: none;\n  padding: 5px;\n}\n.feed ul li.message[data-v-4b6ab3f5] {\n  margin: 5px 0;\n  width: 100%;\n}\n.feed ul li.message .text[data-v-4b6ab3f5] {\n  max-width: 100%;\n  border-radius: 5px;\n  padding: 8px;\n  display: inline-block;\n}\n.feed ul li.message.received[data-v-4b6ab3f5] {\n  text-align: right;\n}\n.feed ul li.message.received .text[data-v-4b6ab3f5] {\n  background: #b2b2b2;\n}\n.feed ul li.message.sent[data-v-4b6ab3f5] {\n  text-align: left;\n}\n.feed ul li.message.sent .text[data-v-4b6ab3f5] {\n  background: #81c4f9;\n}", ""]);
+exports.push([module.i, ".feed[data-v-4b6ab3f5] {\n  height: 100%;\n  max-height: 350px;\n  overflow: auto;\n  box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);\n  background-image: url(\"https://66.media.tumblr.com/53a35e7ed66f3159e01f3663af30706b/tumblr_ouztgbH0CG1vj8v9mo1_400.png\");\n}\n.feed ul[data-v-4b6ab3f5] {\n  list-style-type: none;\n  padding: 50px;\n}\n.feed ul li.message[data-v-4b6ab3f5] {\n  margin: 5px 0;\n  width: 100%;\n}\n.feed ul li.message .text[data-v-4b6ab3f5] {\n  max-width: 100%;\n  border-radius: 7.5px;\n  padding: 4px;\n  display: inline-block;\n}\n.feed ul li.message.received[data-v-4b6ab3f5] {\n  text-align: right;\n}\n.feed ul li.message.received .text[data-v-4b6ab3f5] {\n  background: #b2b2b2;\n  padding-right: 50px;\n  padding-left: 10px;\n}\n.feed ul li.message.sent[data-v-4b6ab3f5] {\n  text-align: left;\n}\n.feed ul li.message.sent .text[data-v-4b6ab3f5] {\n  background: #81c4f9;\n  padding-right: 50px;\n  padding-left: 10px;\n}", ""]);
 
 // exports
 
@@ -48236,7 +48249,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { ref: "feed", staticClass: "feed mb-3" }, [
+  return _c("div", { ref: "feed", staticClass: "feed mb-3 container" }, [
     _c(
       "ul",
       _vm._l(_vm.msgFill, function(msg) {
@@ -62204,8 +62217,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Satrio\download\github\larachat\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Satrio\download\github\larachat\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\angga\larachat\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\angga\larachat\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

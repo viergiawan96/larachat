@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Message;
+use App\message;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -22,7 +22,7 @@ class SendGlobalNotification implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Message $message)
+    public function __construct(message $message)
     {
         $this->message = $message;
     }
@@ -39,8 +39,6 @@ class SendGlobalNotification implements ShouldBroadcast
 
     public function broadcastWith()
     {
-        $this->message->load('fromContact');
-
         return ["message" => $this->message];
     }
 }

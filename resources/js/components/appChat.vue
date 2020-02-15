@@ -16,17 +16,15 @@
             hanleIncoming(message){
                 let idusrFrom = this.$store.getters.idusrFrom;
                 if( message.from == idusrFrom ){
-                    this.$store.dispatch('pushMsg');
+                    this.$store.dispatch('pushMsg',message);
                     return;
                 }
-                alert("Hello! I am an alert box!!");
             }
         },
          mounted() {
             Echo.private(`messages.${this.$store.getters.idUser}`)
                 .listen('SendGlobalNotification', (e) => {
                     this.hanleIncoming(e.message);
-                    alert("Hello! I am an alert box!!");
                 });
         },
         components: {
