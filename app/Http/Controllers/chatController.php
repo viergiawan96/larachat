@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\message;
+use App\Events\SendGlobalNotification;
 
 class chatController extends Controller
 {
@@ -41,6 +42,8 @@ class chatController extends Controller
         $message->text = $request->text;
         $message->save();
         
+        broadcast(new SendGlobalNotification($message));
+
         return response()->json($message);
     }
 }
