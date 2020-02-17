@@ -16,7 +16,9 @@ import Axios from "axios";
 export default {
     methods:{
         loadUser(){
-            Axios.get('/api/getuser')
+            axios.post('/api/getuser', {
+                    id: this.$store.getters.idUser
+                })
                 .then((response) => {
                     this.$store.commit('UpdUsr',response.data);
                 })
@@ -28,7 +30,7 @@ export default {
             const usrFrom= this.$store.getters.usrFrom;
             const idUsrFrom = this.$store.getters.idusrFrom;
             if(!usrFrom){
-                return;
+                alert('Select a Contact');
             }
 
             Axios.post('/api/sendMsg',{

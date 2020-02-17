@@ -9,7 +9,7 @@
                     <p class="name">{{ user.name }}</p>
                     <p class="email">{{ user.email }}</p>
                 </div>
-                <span class="unread">1</span>
+                <span class="unread" v-if="user.unread"> {{ user.unread }} </span>
             </li>
         </ul>
     </div>
@@ -37,6 +37,7 @@ export default {
             .then((response) => { 
                 this.$store.dispatch('getUser', response.data.nameUser);
                 this.$store.dispatch('getFilMsg', response.data.msgFill);
+                this.$store.dispatch('updRead');
             }).catch((error) => {
                 console.log(error);
             })

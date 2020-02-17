@@ -18,6 +18,9 @@
                 if( message.from == idusrFrom ){
                     this.$store.dispatch('pushMsg',message);
                     return;
+                }else if(message.to == this.idUser && message.from != idusrFrom) {
+                    this.$store.dispatch('updUnRead', message);
+                    return;
                 }
             }
         },

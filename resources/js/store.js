@@ -8,9 +8,7 @@ export default{
     },
     getters: {
         user(state){
-            return state.user.filter(function (user) {
-                return user.id != state.idUser
-            })
+            return state.user;
         },
         idUser(state){
             return state.idUser;
@@ -43,6 +41,14 @@ export default{
         },
         pushMsg(state, msgNew){
             state.filmsg.push(msgNew);
+        },
+        updRead(state) {
+                let usr = state.user.filter(user =>  user.id == state.idusrFrom);
+                usr[0].unread = 0;
+        },
+        updUnRead(state, message) {
+            let unread = state.user.filter(user => user.id ==message.from);
+                unread[0].unread += 1;
         }
     },
     actions: {
@@ -60,6 +66,12 @@ export default{
         },
         getFilMsg({commit}, Filmsg) {
             commit('getFilMsg', Filmsg)
+        },
+        updRead({commit}) {
+            commit('updRead')
+        },
+        updUnRead({commit}, message) {
+            commit('updUnRead', message)
         }
     }
 };

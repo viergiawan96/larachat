@@ -2017,6 +2017,9 @@ __webpack_require__.r(__webpack_exports__);
       if (message.from == idusrFrom) {
         this.$store.dispatch('pushMsg', message);
         return;
+      } else if (message.to == this.idUser && message.from != idusrFrom) {
+        this.$store.dispatch('updUnRead', message);
+        return;
       }
     }
   },
@@ -2084,6 +2087,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.$store.dispatch('getUser', response.data.nameUser);
 
         _this.$store.dispatch('getFilMsg', response.data.msgFill);
+
+        _this.$store.dispatch('updRead');
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2129,7 +2134,9 @@ __webpack_require__.r(__webpack_exports__);
     loadUser: function loadUser() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/getuser').then(function (response) {
+      axios.post('/api/getuser', {
+        id: this.$store.getters.idUser
+      }).then(function (response) {
         _this.$store.commit('UpdUsr', response.data);
       })["catch"](function (error) {
         console.log(error);
@@ -2142,7 +2149,7 @@ __webpack_require__.r(__webpack_exports__);
       var idUsrFrom = this.$store.getters.idusrFrom;
 
       if (!usrFrom) {
-        return;
+        alert('Select a Contact');
       }
 
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/sendMsg', {
@@ -48349,7 +48356,11 @@ var render = function() {
                 _c("p", { staticClass: "email" }, [_vm._v(_vm._s(user.email))])
               ]),
               _vm._v(" "),
-              _c("span", { staticClass: "unread" }, [_vm._v("1")])
+              user.unread
+                ? _c("span", { staticClass: "unread" }, [
+                    _vm._v(" " + _vm._s(user.unread) + " ")
+                  ])
+                : _vm._e()
             ]
           )
         }),
@@ -62136,9 +62147,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   getters: {
     user: function user(state) {
-      return state.user.filter(function (user) {
-        return user.id != state.idUser;
-      });
+      return state.user;
     },
     idUser: function idUser(state) {
       return state.idUser;
@@ -62171,6 +62180,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     pushMsg: function pushMsg(state, msgNew) {
       state.filmsg.push(msgNew);
+    },
+    updRead: function updRead(state) {
+      var usr = state.user.filter(function (user) {
+        return user.id == state.idusrFrom;
+      });
+      usr[0].unread = 0;
+    },
+    updUnRead: function updUnRead(state, message) {
+      var unread = state.user.filter(function (user) {
+        return user.id == message.from;
+      });
+      unread[0].unread += 1;
     }
   },
   actions: {
@@ -62193,6 +62214,14 @@ __webpack_require__.r(__webpack_exports__);
     getFilMsg: function getFilMsg(_ref5, Filmsg) {
       var commit = _ref5.commit;
       commit('getFilMsg', Filmsg);
+    },
+    updRead: function updRead(_ref6) {
+      var commit = _ref6.commit;
+      commit('updRead');
+    },
+    updUnRead: function updUnRead(_ref7, message) {
+      var commit = _ref7.commit;
+      commit('updUnRead', message);
     }
   }
 });
@@ -62217,8 +62246,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\angga\larachat\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\angga\larachat\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Satrio\download\github\larachat\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Satrio\download\github\larachat\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
