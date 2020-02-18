@@ -1,9 +1,12 @@
 <template>
-    <div class="feed mb-3 container" ref="feed">
+    <div class="feed mb-1 container rounded shadow" ref="feed">
         <ul>
             <li v-for="msg in msgFill" :key="msg.id"  :class="`message${msg.to == getIdusr ? ' sent' : ' received'}`">
                 <div class="text">
                     {{msg.text}}
+                </div>
+                <div class="date mb-3">
+                    {{formatDate(msg.created_at)| dateFormat('DD MMM') }} | {{formatDate(msg.created_at)| dateFormat('HH:mm A') }}
                 </div>
             </li>
         </ul>
@@ -17,6 +20,10 @@ export default {
             setTimeout(() => {
                 this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
             }, 50);
+        },
+        formatDate(date) {
+            let value = date.replace(/-/g,".");
+            return new Date(value);
         }
     },
     watch: {
@@ -39,6 +46,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  display: none;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
 .feed {
     height: 100%;
     max-height: 350px;
@@ -52,6 +78,11 @@ export default {
             &.message {
                 margin: 5px 0;
                 width: 100%;
+                .date{
+                    font-size: 9px;
+                    font-weight: bold;
+                    opacity: 80%;
+                }
                 .text {
                     max-width: 100%;
                     border-radius: 7.5px;

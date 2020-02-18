@@ -1,6 +1,6 @@
 <template>
     <div class="composer">
-        <textarea v-model="message" v-on:keyup.enter.ctrl="send" placeholder="message.."></textarea>
+        <textarea class="shadow" v-model="message" v-on:keyup.enter.ctrl="send" placeholder="message.."></textarea>
     </div>
 </template>
 

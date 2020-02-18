@@ -9,16 +9,7 @@
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">Laravel Messager</div>
-                <div id="app" class="card-body">
-                    <app-chat><app-chat/>
-                </div>
-            </div>
-        </div>
-    </div>
+<div id="app" class="contanier">
+    <app-chat><app-chat/>
 </div>
 @endsection

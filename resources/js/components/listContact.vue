@@ -1,7 +1,7 @@
 <template>
-    <div class=" contacts-list border col-sm-4 float-right">
+    <div class=" contacts-list border rounded shadow">
         <ul>
-            <li v-for="user in loadUser" :key="user.id" @click="filmsg(user.id)" >
+            <li v-for="user in loadUser" :key="user.id" @click="filmsg(user.id)" :class="{'selected' : idFrom == user.id  }">
                 <div class="avatar">
                     <img src="img/150x150.png" alt="Avatar"/>
                 </div>
@@ -46,6 +46,9 @@ export default {
     computed:{
         loadUser(){
             return this.$store.getters.user;
+        },
+        idFrom(){
+            return this.$store.getters.idusrFrom;
         }
     }
 }
@@ -53,9 +56,9 @@ export default {
 
 <style lang="scss" scoped>
 .contacts-list {
-    flex: 2;
+    flex: 3;
     max-height: 100%;
-    height: 500px;
+    height: 415px;
     overflow: auto;
     ul {
         list-style-type: none;

@@ -1,8 +1,17 @@
 <template>
     <div class="container">
-        <div class="row">
-            <msgContact/>
-            <listContact/>
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Messager</h4>
+                    </div>
+                    <div class="card-body row">
+                        <msgContact/>
+                        <listContact/>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -30,6 +39,11 @@
                     this.hanleIncoming(e.message);
                 });
         },
+            computed:{
+            usrfrom(){
+                return this.$store.getters.usrFrom;
+            }
+        },
         components: {
             listContact,
             msgContact
@@ -38,3 +52,14 @@
     }
 
 </script>
+
+<style lang="scss" scoped>
+.avatar img{
+            width: 40px;
+            border-radius: 50%;
+        }
+.avatar h5 {
+    text-align: center;
+    margin-left: 50px;
+}
+</style>
