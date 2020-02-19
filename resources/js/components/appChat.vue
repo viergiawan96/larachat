@@ -24,10 +24,11 @@
         methods: {
             hanleIncoming(message){
                 let idusrFrom = this.$store.getters.idusrFrom;
+                let idUser = this.$store.getters.idUser;
                 if( message.from == idusrFrom ){
                     this.$store.dispatch('pushMsg',message);
                     return;
-                }else if(message.to == this.idUser && message.from != idusrFrom) {
+                }else if(message.to == idUser && message.from != idusrFrom) {
                     this.$store.dispatch('updUnRead', message);
                     return;
                 }

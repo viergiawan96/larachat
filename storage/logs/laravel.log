@@ -4397,3 +4397,268 @@ esbot\\carbon\\src\\Carbon\\Traits\\Creator.php(616): Carbon\\Carbon::rawCreateF
 #57 D:\\Satrio\\download\\github\\larachat\\server.php(21): require_once('D:\\\\Satrio\\\\downl...')
 #58 {main}
 "} 
+[2020-02-18 21:24:17] local.ERROR: SQLSTATE[HY000] [1049] Unknown database 'laravel' (SQL: select * from information_schema.tables where table_schema = laravel and table_name = migrations and table_type = 'BASE TABLE') {"exception":"[object] (Illuminate\\Database\\QueryException(code: 1049): SQLSTATE[HY000] [1049] Unknown database 'laravel' (SQL: select * from information_schema.tables where table_schema = laravel and table_name = migrations and table_type = 'BASE TABLE') at D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
+[stacktrace]
+#0 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('select * from i...', Array, Object(Closure))
+#1 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(338): Illuminate\\Database\\Connection->run('select * from i...', Array, Object(Closure))
+#2 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\MySqlBuilder.php(18): Illuminate\\Database\\Connection->select('select * from i...', Array)
+#3 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\DatabaseMigrationRepository.php(169): Illuminate\\Database\\Schema\\MySqlBuilder->hasTable('migrations')
+#4 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(585): Illuminate\\Database\\Migrations\\DatabaseMigrationRepository->repositoryExists()
+#5 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(91): Illuminate\\Database\\Migrations\\Migrator->repositoryExists()
+#6 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(63): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->prepareDatabase()
+#7 [internal function]: Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#8 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(32): call_user_func_array(Array, Array)
+#9 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(36): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#10 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(90): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#11 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(34): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#12 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(590): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#13 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(201): Illuminate\\Container\\Container->call(Array)
+#14 D:\\prod\\larachat\\vendor\\symfony\\console\\Command\\Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#15 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(188): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#16 D:\\prod\\larachat\\vendor\\symfony\\console\\Application.php(1012): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\prod\\larachat\\vendor\\symfony\\console\\Application.php(272): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\prod\\larachat\\vendor\\symfony\\console\\Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(93): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 D:\\prod\\larachat\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 {main}
+
+[previous exception] [object] (PDOException(code: 1049): SQLSTATE[HY000] [1049] Unknown database 'laravel' at D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php:70)
+[stacktrace]
+#0 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php(70): PDO->__construct('mysql:host=127....', 'root', '', Array)
+#1 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php(46): Illuminate\\Database\\Connectors\\Connector->createPdoConnection('mysql:host=127....', 'root', '', Array)
+#2 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\MySqlConnector.php(24): Illuminate\\Database\\Connectors\\Connector->createConnection('mysql:host=127....', Array, Array)
+#3 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\ConnectionFactory.php(182): Illuminate\\Database\\Connectors\\MySqlConnector->connect(Array)
+#4 [internal function]: Illuminate\\Database\\Connectors\\ConnectionFactory->Illuminate\\Database\\Connectors\\{closure}()
+#5 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(924): call_user_func(Object(Closure))
+#6 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(959): Illuminate\\Database\\Connection->getPdo()
+#7 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(404): Illuminate\\Database\\Connection->getReadPdo()
+#8 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(330): Illuminate\\Database\\Connection->getPdoForSelect(true)
+#9 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(662): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}('select * from i...', Array)
+#10 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('select * from i...', Array, Object(Closure))
+#11 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(338): Illuminate\\Database\\Connection->run('select * from i...', Array, Object(Closure))
+#12 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\MySqlBuilder.php(18): Illuminate\\Database\\Connection->select('select * from i...', Array)
+#13 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\DatabaseMigrationRepository.php(169): Illuminate\\Database\\Schema\\MySqlBuilder->hasTable('migrations')
+#14 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(585): Illuminate\\Database\\Migrations\\DatabaseMigrationRepository->repositoryExists()
+#15 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(91): Illuminate\\Database\\Migrations\\Migrator->repositoryExists()
+#16 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(63): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->prepareDatabase()
+#17 [internal function]: Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#18 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(32): call_user_func_array(Array, Array)
+#19 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(36): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#20 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(90): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#21 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(34): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#22 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(590): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#23 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(201): Illuminate\\Container\\Container->call(Array)
+#24 D:\\prod\\larachat\\vendor\\symfony\\console\\Command\\Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#25 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(188): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#26 D:\\prod\\larachat\\vendor\\symfony\\console\\Application.php(1012): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#27 D:\\prod\\larachat\\vendor\\symfony\\console\\Application.php(272): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 D:\\prod\\larachat\\vendor\\symfony\\console\\Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(93): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#31 D:\\prod\\larachat\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#32 {main}
+"} 
+[2020-02-18 21:32:01] local.INFO: Broadcasting [App\Events\SendGlobalNotification] on channels [private-messages.0] with payload:
+{
+    "message": {
+        "id": 1,
+        "from": 2,
+        "to": 0,
+        "read": 1,
+        "text": "das",
+        "created_at": "2020-02-18 21:32:00",
+        "updated_at": "2020-02-18 21:32:00"
+    },
+    "socket": null
+}  
+[2020-02-18 21:33:12] local.INFO: Broadcasting [App\Events\SendGlobalNotification] on channels [private-messages.1] with payload:
+{
+    "message": {
+        "id": 2,
+        "from": 2,
+        "to": 1,
+        "read": 1,
+        "text": "test",
+        "created_at": "2020-02-18 21:33:12",
+        "updated_at": "2020-02-18 21:33:12"
+    },
+    "socket": null
+}  
+[2020-02-18 21:33:29] local.INFO: Broadcasting [App\Events\SendGlobalNotification] on channels [private-messages.2] with payload:
+{
+    "message": {
+        "id": 3,
+        "from": 1,
+        "to": 2,
+        "read": 1,
+        "text": "haloo",
+        "created_at": "2020-02-18 21:33:29",
+        "updated_at": "2020-02-18 21:33:29"
+    },
+    "socket": null
+}  
+[2020-02-18 21:34:11] local.INFO: Broadcasting [App\Events\SendGlobalNotification] on channels [private-messages.1] with payload:
+{
+    "message": {
+        "id": 4,
+        "from": 2,
+        "to": 1,
+        "read": 1,
+        "text": "test",
+        "created_at": "2020-02-18 21:34:10",
+        "updated_at": "2020-02-18 21:34:10"
+    },
+    "socket": null
+}  
+[2020-02-18 21:40:55] local.INFO: Broadcasting [App\Events\SendGlobalNotification] on channels [private-messages.1] with payload:
+{
+    "message": {
+        "id": 5,
+        "from": 2,
+        "to": 1,
+        "read": 1,
+        "text": "test",
+        "created_at": "2020-02-18 21:40:55",
+        "updated_at": "2020-02-18 21:40:55"
+    },
+    "socket": null
+}  
+[2020-02-18 21:41:05] local.INFO: Broadcasting [App\Events\SendGlobalNotification] on channels [private-messages.2] with payload:
+{
+    "message": {
+        "id": 6,
+        "from": 1,
+        "to": 2,
+        "read": 1,
+        "text": "haloo",
+        "created_at": "2020-02-18 21:41:05",
+        "updated_at": "2020-02-18 21:41:05"
+    },
+    "socket": null
+}  
+[2020-02-18 21:42:16] local.INFO: Broadcasting [App\Events\SendGlobalNotification] on channels [private-messages.1] with payload:
+{
+    "message": {
+        "id": 7,
+        "from": 2,
+        "to": 1,
+        "read": 1,
+        "text": "das",
+        "created_at": "2020-02-18 21:42:16",
+        "updated_at": "2020-02-18 21:42:16"
+    },
+    "socket": null
+}  
+[2020-02-18 21:42:35] local.INFO: Broadcasting [App\Events\SendGlobalNotification] on channels [private-messages.2] with payload:
+{
+    "message": {
+        "id": 8,
+        "from": 1,
+        "to": 2,
+        "read": 1,
+        "text": "dasd",
+        "created_at": "2020-02-18 21:42:35",
+        "updated_at": "2020-02-18 21:42:35"
+    },
+    "socket": null
+}  
+[2020-02-18 21:43:46] local.INFO: Broadcasting [App\Events\SendGlobalNotification] on channels [private-messages.1] with payload:
+{
+    "message": {
+        "id": 9,
+        "from": 2,
+        "to": 1,
+        "read": 1,
+        "text": "test",
+        "created_at": "2020-02-18 21:43:46",
+        "updated_at": "2020-02-18 21:43:46"
+    },
+    "socket": null
+}  
+[2020-02-18 21:44:49] local.INFO: Broadcasting [App\Events\SendGlobalNotification] on channels [private-messages.2] with payload:
+{
+    "message": {
+        "id": 10,
+        "from": 1,
+        "to": 2,
+        "read": 1,
+        "text": "test",
+        "created_at": "2020-02-18 21:44:49",
+        "updated_at": "2020-02-18 21:44:49"
+    },
+    "socket": null
+}  
+[2020-02-18 21:45:08] local.INFO: Broadcasting [App\Events\SendGlobalNotification] on channels [private-messages.1] with payload:
+{
+    "message": {
+        "id": 11,
+        "from": 2,
+        "to": 1,
+        "read": 1,
+        "text": "dasd",
+        "created_at": "2020-02-18 21:45:08",
+        "updated_at": "2020-02-18 21:45:08"
+    },
+    "socket": null
+}  
+[2020-02-18 21:48:32] local.INFO: Broadcasting [App\Events\SendGlobalNotification] on channels [private-messages.1] with payload:
+{
+    "message": {
+        "id": 12,
+        "from": 2,
+        "to": 1,
+        "read": 1,
+        "text": "dasd",
+        "created_at": "2020-02-18 21:48:31",
+        "updated_at": "2020-02-18 21:48:31"
+    },
+    "socket": null
+}  
+[2020-02-18 21:50:22] local.INFO: Broadcasting [App\Events\SendGlobalNotification] on channels [private-messages.2] with payload:
+{
+    "message": {
+        "id": 13,
+        "from": 1,
+        "to": 2,
+        "read": 1,
+        "text": "test",
+        "created_at": "2020-02-18 21:50:22",
+        "updated_at": "2020-02-18 21:50:22"
+    },
+    "socket": null
+}  
+[2020-02-18 21:51:57] local.ERROR: syntax error, unexpected 'return' (T_RETURN) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): syntax error, unexpected 'return' (T_RETURN) at D:\\prod\\larachat\outes\\channels.php:19)
+[stacktrace]
+#0 [internal function]: App\\Providers\\BroadcastServiceProvider->boot()
+#1 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(32): call_user_func_array(Array, Array)
+#2 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(36): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#3 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(90): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#4 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(34): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#5 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(590): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#6 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(836): Illuminate\\Container\\Container->call(Array)
+#7 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(819): Illuminate\\Foundation\\Application->bootProvider(Object(App\\Providers\\BroadcastServiceProvider))
+#8 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}(Object(App\\Providers\\BroadcastServiceProvider), 20)
+#9 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(820): array_walk(Array, Object(Closure))
+#10 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#11 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(219): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#12 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(156): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#13 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(140): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#14 D:\\prod\\larachat\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#15 D:\\prod\\larachat\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#16 D:\\prod\\larachat\\server.php(21): require_once('D:\\\\prod\\\\laracha...')
+#17 {main}
+"} 
+[2020-02-18 22:05:49] local.INFO: Broadcasting [App\Events\SendGlobalNotification] on channels [private-messages.1] with payload:
+{
+    "message": {
+        "id": 14,
+        "from": 2,
+        "to": 1,
+        "read": 1,
+        "text": "dasd",
+        "created_at": "2020-02-18 22:05:47",
+        "updated_at": "2020-02-18 22:05:47"
+    },
+    "socket": null
+}  

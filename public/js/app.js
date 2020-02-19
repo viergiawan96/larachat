@@ -2029,11 +2029,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     hanleIncoming: function hanleIncoming(message) {
       var idusrFrom = this.$store.getters.idusrFrom;
+      var idUser = this.$store.getters.idUser;
 
       if (message.from == idusrFrom) {
         this.$store.dispatch('pushMsg', message);
         return;
-      } else if (message.to == this.idUser && message.from != idusrFrom) {
+      } else if (message.to == idUser && message.from != idusrFrom) {
         this.$store.dispatch('updUnRead', message);
         return;
       }
@@ -62507,8 +62508,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Satrio\download\github\larachat\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Satrio\download\github\larachat\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\prod\larachat\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\prod\larachat\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

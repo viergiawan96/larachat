@@ -47,7 +47,7 @@ export default{
                 usr[0].unread = 0;
         },
         updUnRead(state, message) {
-            let unread = state.user.filter(user => user.id ==message.from);
+            let unread = state.user.filter(user => user.id == message.from);
                 unread[0].unread += 1;
         }
     },
