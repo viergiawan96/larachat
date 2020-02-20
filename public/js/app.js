@@ -2114,6 +2114,13 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    getAvatar: function getAvatar(avatar) {
+      if (!avatar) {
+        return "storage/images/150x150.png";
+      }
+
+      return "storage/images/" + avatar;
     }
   },
   computed: {
@@ -8763,7 +8770,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".contacts-list[data-v-8c7540b2] {\n  -webkit-box-flex: 3;\n          flex: 3;\n  max-height: 100%;\n  height: 415px;\n  overflow: auto;\n}\n.contacts-list ul[data-v-8c7540b2] {\n  list-style-type: none;\n  padding-left: 0;\n}\n.contacts-list ul li[data-v-8c7540b2] {\n  display: -webkit-box;\n  display: flex;\n  padding: 2px;\n  border-bottom: 1px solid #aaaaaa;\n  height: 80px;\n  position: relative;\n  cursor: pointer;\n}\n.contacts-list ul li.selected[data-v-8c7540b2] {\n  background: #dfdfdf;\n}\n.contacts-list ul li span.unread[data-v-8c7540b2] {\n  background: #1371ec;\n  color: #fff;\n  position: absolute;\n  right: 11px;\n  top: 20px;\n  display: -webkit-box;\n  display: flex;\n  font-weight: 700;\n  min-width: 20px;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n  line-height: 20px;\n  font-size: 10px;\n  padding: 0 4px;\n  border-radius: 50%;\n}\n.contacts-list ul li .avatar[data-v-8c7540b2] {\n  -webkit-box-flex: 1;\n          flex: 1;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n}\n.contacts-list ul li .avatar img[data-v-8c7540b2] {\n  width: 55px;\n  border-radius: 50%;\n  margin: 0 auto;\n}\n.contacts-list ul li .contact[data-v-8c7540b2] {\n  -webkit-box-flex: 3;\n          flex: 3;\n  font-size: 15px;\n  overflow: hidden;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n}\n.contacts-list ul li .contact p[data-v-8c7540b2] {\n  margin: 0;\n}\n.contacts-list ul li .contact p.name[data-v-8c7540b2] {\n  font-weight: bold;\n}", ""]);
+exports.push([module.i, ".contacts-list[data-v-8c7540b2] {\n  -webkit-box-flex: 3;\n          flex: 3;\n  max-height: 100%;\n  height: 415px;\n  overflow: auto;\n}\n.contacts-list ul[data-v-8c7540b2] {\n  list-style-type: none;\n  padding-left: 0;\n}\n.contacts-list ul li[data-v-8c7540b2] {\n  display: -webkit-box;\n  display: flex;\n  padding: 2px;\n  border-bottom: 1px solid #aaaaaa;\n  height: 80px;\n  position: relative;\n  cursor: pointer;\n}\n.contacts-list ul li.selected[data-v-8c7540b2] {\n  background: #dfdfdf;\n}\n.contacts-list ul li span.unread[data-v-8c7540b2] {\n  background: #1371ec;\n  color: #fff;\n  position: absolute;\n  right: 11px;\n  top: 20px;\n  display: -webkit-box;\n  display: flex;\n  font-weight: 700;\n  min-width: 20px;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n  line-height: 20px;\n  font-size: 10px;\n  padding: 0 4px;\n  border-radius: 50%;\n}\n.contacts-list ul li .avatar[data-v-8c7540b2] {\n  -webkit-box-flex: 1;\n          flex: 1;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n}\n.contacts-list ul li .avatar img[data-v-8c7540b2] {\n  display: inline-block;\n  position: relative;\n  width: 60px;\n  height: 60px;\n  overflow: hidden;\n  border-radius: 50%;\n}\n.contacts-list ul li .contact[data-v-8c7540b2] {\n  -webkit-box-flex: 3;\n          flex: 3;\n  font-size: 15px;\n  overflow: hidden;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n}\n.contacts-list ul li .contact p[data-v-8c7540b2] {\n  margin: 0;\n}\n.contacts-list ul li .contact p.name[data-v-8c7540b2] {\n  font-weight: bold;\n}", ""]);
 
 // exports
 
@@ -48591,7 +48598,11 @@ var render = function() {
             }
           },
           [
-            _vm._m(0, true),
+            _c("div", { staticClass: "avatar" }, [
+              _c("img", {
+                attrs: { src: _vm.getAvatar(user.img), alt: "Avatar" }
+              })
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "contact" }, [
               _c("p", { staticClass: "name" }, [_vm._v(_vm._s(user.name))]),
@@ -48611,16 +48622,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "avatar" }, [
-      _c("img", { attrs: { src: "img/150x150.png", alt: "Avatar" } })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -62508,8 +62510,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\prod\larachat\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\prod\larachat\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Satrio\download\github\larachat\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Satrio\download\github\larachat\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

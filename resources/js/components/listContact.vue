@@ -3,7 +3,7 @@
         <ul>
             <li v-for="user in loadUser" :key="user.id" @click="filmsg(user.id)" :class="{'selected' : idFrom == user.id  }">
                 <div class="avatar">
-                    <img src="img/150x150.png" alt="Avatar"/>
+                    <img :src="getAvatar(user.img)" alt="Avatar"/>
                 </div>
                 <div class="contact">
                     <p class="name">{{ user.name }}</p>
@@ -41,6 +41,13 @@ export default {
             }).catch((error) => {
                 console.log(error);
             })
+        },
+        getAvatar(avatar){
+        if(!avatar) {
+            return "storage/images/150x150.png"
+        }
+
+            return "storage/images/"+avatar;
         }
     },
     computed:{
@@ -94,9 +101,12 @@ export default {
                 display: flex;
                 align-items: center;
                 img {
-                    width: 55px;
+                    display: inline-block;
+                    position: relative;
+                    width: 60px;
+                    height: 60px;
+                    overflow: hidden;
                     border-radius: 50%;
-                    margin: 0 auto;
                 }
             }
             .contact {
